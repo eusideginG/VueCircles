@@ -18,6 +18,5 @@ export const drawFixedCircle = (canvas, circle) => {
   ctx.stroke();
   ctx.fillStyle = circle.color;
   ctx.fill();
-  console.log(canvas, circle);
 };
 
