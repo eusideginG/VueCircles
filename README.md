@@ -82,3 +82,25 @@ This project is licensed under the MIT License.
 For questions or support, please contact:
 - Your Name: [your.email@example.com](mailto:your.email@example.com)
 - GitHub: [yourusername](https://github.com/yourusername)
+
+## License
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. 
+
+[![License: CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc/4.0/)
+
+You are free to:
+- **Share** — copy and redistribute the material in any medium or format
+- **Adapt** — remix, transform, and build upon the material
+
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+Under the following terms:
+- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- **NonCommercial** — You may not use the material for commercial purposes.
+
+**Notices**:
+- You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+- No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+
+For more information, see the [license details](http://creativecommons.org/licenses/by-nc/4.0/).
+
