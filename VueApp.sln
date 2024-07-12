@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VueApp.Server", "VueApp.Server\VueApp.Server.csproj", "{196A6AA3-A760-4B5E-AF99-3083903E2915}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "vueapp.client", "vueapp.client\vueapp.client.esproj", "{A77A050A-18BD-41E8-94C5-4BCB6E0F1E29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{196A6AA3-A760-4B5E-AF99-3083903E2915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{196A6AA3-A760-4B5E-AF99-3083903E2915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{196A6AA3-A760-4B5E-AF99-3083903E2915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{196A6AA3-A760-4B5E-AF99-3083903E2915}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A77A050A-18BD-41E8-94C5-4BCB6E0F1E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A77A050A-18BD-41E8-94C5-4BCB6E0F1E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A77A050A-18BD-41E8-94C5-4BCB6E0F1E29}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A77A050A-18BD-41E8-94C5-4BCB6E0F1E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A77A050A-18BD-41E8-94C5-4BCB6E0F1E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A77A050A-18BD-41E8-94C5-4BCB6E0F1E29}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC74998B-70D7-49B2-8DDE-D618D940DB57}
+	EndGlobalSection
+EndGlobal
