@@ -15,7 +15,6 @@ import { RouterView } from "vue-router";
         <span>🟤</span>
         <span>⚫</span>
       </div>
-      <!-- <NavLinks /> -->
     </nav>
   </header>
   <main class="w-full h-[95%]">
