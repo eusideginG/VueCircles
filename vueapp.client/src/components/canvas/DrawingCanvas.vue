@@ -9,6 +9,9 @@ import { useAxisStore } from "@/stores/axisStore";
 const store = useAxisStore();
 const route = useRoute();
 
+// define props
+const props = defineProps(["circles"]);
+
 // reactive values
 const canvas = ref(null);
 
@@ -18,10 +21,14 @@ defineExpose({ canvas });
 // canvas click event listener
 const onCanvasClick = (event) => {
   const rect = canvas.value.getBoundingClientRect();
-
+  
   store.xAxis = Math.floor(event.clientX - rect.left);
   store.yAxis = Math.floor(event.clientY - rect.top);
-
+  
+  if(props.circles.value.filter(c => c.xAxis === store.xAxis && c.yAxis === store.yAxis).length > 0){
+    return
+  }
+  
   const { color, radius } = drawCircle(store.xAxis, store.yAxis, canvas.value);
 
   postCircle({

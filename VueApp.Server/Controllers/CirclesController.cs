@@ -55,6 +55,19 @@ namespace VueApp.Server.Controllers
                 dBcontext.SaveChanges();
             }
 
+
+
+            var circles = (from crcl in this.dBcontext.Circles
+                           join d in dBcontext.Data
+                           on crcl.DataId equals d.Id
+                           where d.Id == data.Id
+                           select crcl).ToList();
+
+            if (circles.Where(c => c.XAxis == values.XAxis && c.YAxis == values.YAxis).Count() > 0)
+            {
+                return Ok("Circles cannot have the same x and y axis");
+            }
+
             // add new circle
             CirclesEntity circle  = new() 
             {

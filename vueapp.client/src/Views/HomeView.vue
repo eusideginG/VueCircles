@@ -40,6 +40,10 @@ onMounted(async () => {
 
 // handling the form submit from CoordinatesForm component
 const handleFormSubmit = (xAxis, yAxis) => {
+  if(circles.value.filter(c => c.xAxis === xAxis && c.yAxis === yAxis).length > 0){
+    return
+  }
+
   const { color, radius } = drawCircle(xAxis, yAxis, canvasRef.value.canvas);
 
   postCircle({
@@ -57,7 +61,7 @@ const handleFormSubmit = (xAxis, yAxis) => {
   <div class="flex flex-col items-center">
     <div class="flex flex-col items-center">
       <CoordinatesForm @onFormSubmit="handleFormSubmit" />
-      <DrawingCanvas ref="canvasRef" />
+      <DrawingCanvas ref="canvasRef" :circles="circles"/>
     </div>
   </div>
 </template>
