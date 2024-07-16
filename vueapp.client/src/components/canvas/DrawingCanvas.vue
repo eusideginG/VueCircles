@@ -38,9 +38,7 @@ const onCanvasClick = (event) => {
 onMounted(() => {
   canvas.value.width = 600;
   canvas.value.height = 400;
-  canvas.value.addEventListener("click", (e) => {
-    onCanvasClick(e);
-  });
+  canvas.value.addEventListener("click", (e) => onCanvasClick(e));
 });
 </script>
 
@@ -48,7 +46,6 @@ onMounted(() => {
   <div class="flex flex-col items-center">
     <canvas
       ref="canvas"
-      @click="() => onCanvasClick"
       class="border-2 border-black shadow-2xl rounded-lg"
     ></canvas>
   </div>
