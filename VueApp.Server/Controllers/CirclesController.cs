@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 using VueApp.Server.Data;
 using VueApp.Server.Models.DTOs;
 using VueApp.Server.Models.Entitys;
@@ -11,7 +12,7 @@ namespace VueApp.Server.Controllers
     {
         private ApplicationDbContext dBcontext;
 
-        public CirclesController(ApplicationDbContext applicationDbContext) 
+        public CirclesController(ApplicationDbContext applicationDbContext)
         {
             this.dBcontext = applicationDbContext;
         }
@@ -21,14 +22,14 @@ namespace VueApp.Server.Controllers
         public IActionResult Get(Guid id)
         {
             var circles = (from crcl in this.dBcontext.Circles
-                          join d in dBcontext.Data
-                          on crcl.DataId equals d.Id
-                          where d.Id == id
-                          select crcl).ToList();
+                           join d in dBcontext.Data
+                           on crcl.DataId equals d.Id
+                           where d.Id == id
+                           select crcl).ToList();
 
             if (circles.Count == 0)
             {
-                return Ok("No circles found");
+                return new OkObjectResult(new { message = "No circles found" });
             }
             else
             {
@@ -42,7 +43,7 @@ namespace VueApp.Server.Controllers
         {
             if (values.DataId.GetType() != typeof(Guid))
             {
-                return BadRequest("the url parameter is not a Guid");
+                return new BadRequestObjectResult(new { message = "the url parameter is not a Guid" });
             }
 
             // check if data exists
@@ -55,21 +56,32 @@ namespace VueApp.Server.Controllers
                 dBcontext.SaveChanges();
             }
 
+            List<CirclesEntity> circles = new List<CirclesEntity>();
 
+            if (data != null)
+            {
+                Console.WriteLine("fu");
 
-            var circles = (from crcl in this.dBcontext.Circles
+                circles = (from crcl in this.dBcontext.Circles
                            join d in dBcontext.Data
                            on crcl.DataId equals d.Id
-                           where d.Id == data.Id
+                           where d.Id == data!.Id
                            select crcl).ToList();
-
-            if (circles.Where(c => c.XAxis == values.XAxis && c.YAxis == values.YAxis).Count() > 0)
-            {
-                return Ok("Circles cannot have the same x and y axis");
             }
 
+            if (circles != null)
+            {
+                if (circles.Where(c => c.XAxis == values.XAxis && c.YAxis == values.YAxis).Count() > 0)
+                {
+                    return new OkObjectResult(new { message = "Circles cannot have the same x and y axis" });
+                }
+            }
+
+
+
+
             // add new circle
-            CirclesEntity circle  = new() 
+            CirclesEntity circle = new()
             {
                 Id = new Guid(),
                 Time = values.Time,

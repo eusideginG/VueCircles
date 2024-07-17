@@ -21,9 +21,9 @@ const maxCanvasY = 400;
         [&>label]:text-lg [&>label]:font-bold"
     >
       <label for="xAxis">X:</label>
-      <input type="number" name="xAxis" placeholder="300.0" v-model="store.xAxis" :min="minCanvasX" :max="maxCanvasX">
+      <input type="number" id="xAxis" name="xAxis" placeholder="300.0" v-model="store.xAxis" :min="minCanvasX" :max="maxCanvasX">
       <label for="yAxis">Y:</label>
-      <input type="number" name="yAxis" placeholder="200.0" v-model="store.yAxis" :min="minCanvasY" :max="maxCanvasY" />
+      <input type="number" id="yAxis" name="yAxis" placeholder="200.0" v-model="store.yAxis" :min="minCanvasY" :max="maxCanvasY" />
       <button
         type="submit"
         class="border rounded-full hover:border-gray-500 active:bg-gray-100 active:border-gray-200"

@@ -3,15 +3,16 @@ import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import DrawingCanvas from "@/components/canvas/DrawingCanvas.vue";
 import CoordinatesForm from "@/components/forms/CoordinatesForm.vue";
+import { useAxisStore } from "@/stores/axisStore";
 import { drawCircle, drawFixedCircle } from "../../services/draw/drawCirle";
 import { getById, postCircle } from "../../services/requests/circleRequests";
 
 const route = useRoute();
 const router = useRouter();
+const store = useAxisStore();
 
 // reference to canvas from DrawingCanvas component
 const canvasRef = ref(null);
-const circles = ref([]);
 
 onMounted(async () => {
   // if the id url parameter is not (uuid - guid) redirect and generate a new one
@@ -22,11 +23,16 @@ onMounted(async () => {
   ) {
     router.replace(`/${crypto.randomUUID()}`);
   } else {
-    circles.value = await getById(route.params.id);
-    if (!(circles.value.length > 0)) {
+    store.circles = await getById(route.params.id);
+
+    if (!Array.isArray(store.circles)) {
+      store.circles = new Array();
+    }
+
+    if (!(store.circles.length > 0)) {
       console.log("No circles found");
     } else {
-      circles.value.map((c) =>
+      store.circles.map((c) =>
         drawFixedCircle(canvasRef.value.canvas, {
           x: c.xAxis,
           y: c.yAxis,
@@ -40,11 +46,26 @@ onMounted(async () => {
 
 // handling the form submit from CoordinatesForm component
 const handleFormSubmit = (xAxis, yAxis) => {
-  if(circles.value.filter(c => c.xAxis === xAxis && c.yAxis === yAxis).length > 0){
-    return
+  if (Array.isArray(store.circles)) {
+    if (
+      store.circles.filter(
+        (c) => c.xAxis === store.xAxis && c.yAxis === store.yAxis
+      ).length > 0
+    ) {
+      return;
+    }
   }
 
   const { color, radius } = drawCircle(xAxis, yAxis, canvasRef.value.canvas);
+
+  store.circles.push({
+    dataId: route.params.id,
+    time: new Date(Date.now()).toJSON(),
+    xAxis: store.xAxis,
+    yAxis: store.yAxis,
+    color: color,
+    diameter: radius * 2,
+  });
 
   postCircle({
     dataId: route.params.id,
@@ -61,7 +82,7 @@ const handleFormSubmit = (xAxis, yAxis) => {
   <div class="flex flex-col items-center">
     <div class="flex flex-col items-center">
       <CoordinatesForm @onFormSubmit="handleFormSubmit" />
-      <DrawingCanvas ref="canvasRef" :circles="circles"/>
+      <DrawingCanvas ref="canvasRef" />
     </div>
   </div>
 </template>
